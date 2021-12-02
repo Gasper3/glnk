@@ -1,7 +1,9 @@
-from django.db import models
-import string
 import random
+import string
+
 from django.conf import settings
+from django.db import models
+
 
 class UrlManager(models.Manager):
     def generate_short_url(self):

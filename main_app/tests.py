@@ -44,3 +44,12 @@ class UrlRESTTestCase(APITestCase):
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
         self.assertEqual("google.com", data.get("url"))
         self.assertEqual("asdFGH", data.get("short_url"))
+
+    def test_create_url_check_ip_and_user_agent(self):
+        url = reverse("create-url")
+        response = self.client.post(url, {"url": "asd.pl"}, HTTP_USER_AGENT="ApiClientTestCase")
+        created_url: Url = Url.objects.get(url="asd.pl")
+
+        self.assertEqual(status.HTTP_201_CREATED, response.status_code)
+        self.assertEqual("127.0.0.1", created_url.ip_address)
+        self.assertEqual("ApiClientTestCase", created_url.user_agent)

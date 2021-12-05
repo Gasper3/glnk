@@ -11,4 +11,4 @@
 3. Go to url `127.0.0.1`
 
 # Django admin
-Admin page is under */\_/admin* url
+Admin page is under `/\_/admin` url

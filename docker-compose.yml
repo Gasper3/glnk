@@ -11,7 +11,7 @@ services:
       - url_shortener_db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
-  web:
+  backend:
     build: .
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -20,6 +20,12 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+  front:
+    image: gasper3/url_shortener_front
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   url_shortener_db:

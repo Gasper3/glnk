@@ -83,8 +83,8 @@ DATABASES = {
         'NAME': 'url_shortener',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': '5433',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 

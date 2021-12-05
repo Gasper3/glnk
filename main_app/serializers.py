@@ -5,7 +5,7 @@ from .models import Url
 
 class UrlSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
-    url = serializers.CharField()
+    url = serializers.URLField()
     short_url = serializers.ReadOnlyField()
 
     def create(self, validated_data: dict):

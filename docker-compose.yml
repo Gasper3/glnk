@@ -18,6 +18,12 @@ services:
       retries: 5
   backend:
     build: .
+    environment:
+      - DB_NAME=url_shortener
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT=5432
+      - DB_HOST=postgres
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
@@ -26,12 +32,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-  front:
-    image: gasper3/url_shortener_front
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
 
 volumes:
   url_shortener_db:

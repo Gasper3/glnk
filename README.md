@@ -12,3 +12,6 @@
 
 # Django admin
 Admin page is under `127.0.0.1:8000/_/admin` url
+
+# Heroku
+App is also available on [heroku](https://gasper-url-shortener.herokuapp.com/)

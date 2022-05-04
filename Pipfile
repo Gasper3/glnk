@@ -15,6 +15,7 @@ pytz = "*"
 sqlparse = "*"
 whitenoise = "*"
 Django = "*"
+gunicorn = "*"
 
 [dev-packages]
 

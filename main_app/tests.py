@@ -1,13 +1,11 @@
-from pprint import pprint as pp
 
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase, testcases
-
-from main_app.managers import UrlManager
+from rest_framework.test import APITestCase
 
 from .models import Url
+from .utils import generate_short_url
 
 
 class UrlRESTTest(APITestCase):
@@ -58,15 +56,12 @@ class UrlRESTTest(APITestCase):
         self.assertEqual("ApiClientTestCase", created_url.user_agent)
 
 
-class UrlManagerTest(TestCase):
-    def setUp(self) -> None:
-        self.manager = Url.objects
-
+class TestUtils(TestCase):
     def test_generate_short_url(self):
         with self.settings(SHORT_URL_SIZE=10):
-            result = self.manager.generate_short_url()
+            result = generate_short_url()
             self.assertEqual(10, len(result))
-        
+
         with self.settings(SHORT_URL_SIZE=3):
-            result = self.manager.generate_short_url()
+            result = generate_short_url()
             self.assertEqual(3, len(result))

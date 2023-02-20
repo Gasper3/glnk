@@ -1,9 +1,8 @@
 from django.urls import path
 
-from .views import CreateShortUrl, RetrieveUrl, index
+from .views import ShortUrlViewSet
 
 urlpatterns = [
-    path("", index),
-    path("url", CreateShortUrl.as_view(), name="create-url"),
-    path("<str:short_url>", RetrieveUrl.as_view(), name="get-url"),
+    path("url", ShortUrlViewSet.as_view(), name="create-url"),
+    path("<str:short_url>", ShortUrlViewSet.as_view(), name="get-url"),
 ]

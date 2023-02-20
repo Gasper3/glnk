@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Url
+from .utils import generate_short_url
 
 
 class UrlSerializer(serializers.Serializer):
@@ -12,8 +13,8 @@ class UrlSerializer(serializers.Serializer):
         ip_address = self.get_ip_address_from_request()
         user_agent = self.get_user_agent_from_request()
 
-        url, created = Url.objects.get_or_create(**validated_data, defaults={
-            "short_url": Url.objects.generate_short_url(),
+        url, _ = Url.objects.get_or_create(**validated_data, defaults={
+            "short_url": generate_short_url(),
             "ip_address": ip_address,
             "user_agent": user_agent
         })

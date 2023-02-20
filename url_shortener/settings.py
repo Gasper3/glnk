@@ -143,7 +143,3 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ],
 }
-
-import django_heroku
-
-django_heroku.settings(locals())

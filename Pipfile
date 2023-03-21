@@ -8,6 +8,7 @@ fastapi = {extras = ["all"], version = "*"}
 psycopg2 = "*"
 alembic = "*"
 sqlalchemy = "*"
+sa-repository = "*"
 
 [dev-packages]
 pytest = "*"

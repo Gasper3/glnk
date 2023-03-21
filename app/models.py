@@ -3,7 +3,7 @@ from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped, relationship
 
 
 class Base(DeclarativeBase):
-    id: int = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
 
 
 class Url(Base):

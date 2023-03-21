@@ -1,8 +1,11 @@
+import os
 import sys
 
 from pydantic import BaseSettings
 
 IS_RUNNING_TESTS = 'pytest' in sys.modules
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class Settings(BaseSettings):
@@ -13,6 +16,11 @@ class Settings(BaseSettings):
     db_port: int
 
     secret_key: str
+
+    short_url_size: int = 5
+
+    class Config:
+        env_file = os.path.join(ROOT_DIR, '.env')
 
     @property
     def db_url(self):

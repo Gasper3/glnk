@@ -19,6 +19,8 @@ def db_session():
 
     try:
         yield session
+        if session.in_transaction():
+            session.commit()
     except Exception:
         session.rollback()
         raise

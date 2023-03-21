@@ -10,9 +10,9 @@ class Url(Base):
     __tablename__ = 'urls'
 
     url: Mapped[str]
-    short_url: Mapped[str] = mapped_column(nullable=False)
-    ip_address: Mapped[str]
-    user_agent: Mapped[str]
+    short_url: Mapped[str | None]
+    ip_address: Mapped[str | None]
+    user_agent: Mapped[str | None]
 
     visits: Mapped[list['UrlVisits']] = relationship(back_populates='url')
 

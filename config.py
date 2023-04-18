@@ -26,5 +26,9 @@ class Settings(BaseSettings):
     def db_url(self):
         return f'postgresql://{self.db_user}:{self.db_pass}@{self.db_host}:{self.db_port}/{self.db_name}'
 
+    @property
+    def postgres_url(self):
+        return f'postgresql://{self.db_user}:{self.db_pass}@{self.db_host}:{self.db_port}'
+
 
 settings = Settings()

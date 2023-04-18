@@ -7,7 +7,7 @@ from config import settings, IS_RUNNING_TESTS
 
 engine = create_engine(settings.db_url)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-SessionTest = scoped_session(sessionmaker())
+SessionTest = scoped_session(sessionmaker(expire_on_commit=False), scopefunc=lambda: 1)
 
 
 @contextlib.contextmanager

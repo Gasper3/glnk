@@ -38,3 +38,22 @@ class TestUrlVisitsRepository:
             4: len(visits_april),
         }
         assert monthly_visits == expected_result
+
+    def test_count(self, url, repository: UrlVisitsRepository):
+        visits = [
+            *factories.UrlVisitsFactory.create_batch(random.randint(1, 10), url=url, created=datetime(2022, 12, 25)),
+            *factories.UrlVisitsFactory.create_batch(
+                random.randint(1, 10),
+                url=url,
+                created=datetime(2023, 4, 1)
+            ),
+            *factories.UrlVisitsFactory.create_batch(
+                random.randint(1, 10),
+                url=url,
+                created=datetime(2023, 3, 1)
+            )
+        ]
+
+        nr_of_visits = repository.count(url)
+
+        assert nr_of_visits == len(visits)

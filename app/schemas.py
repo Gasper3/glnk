@@ -22,3 +22,14 @@ class ErrorSchema(BaseModel):
 
 class BadRequestSchema(ErrorSchema):
     detail: str
+
+
+
+class StatsResponse(BaseModel):
+    monthly_visits: dict[int, int]
+    visits_count: int
+
+
+class StatisticsResponse(BaseModel):
+    url: str
+    stats: StatsResponse

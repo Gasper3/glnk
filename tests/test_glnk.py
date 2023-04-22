@@ -62,9 +62,10 @@ class TestStatistics:
         assert data['url'] == url.url
 
         expected_stats = {
-            'monthly': {
+            'monthly_visits': {
                 '4': len(visits)
-            }
+            },
+            'visits_count': len(visits),
         }
         assert data['stats'] == expected_stats
 
@@ -90,4 +91,4 @@ class TestStatistics:
             '3': len(visits_march),
             '4': len(visits_april),
         }
-        assert data['monthly'] == expected_stats
+        assert data['monthly_visits'] == expected_stats

@@ -13,8 +13,7 @@ api_router = APIRouter(prefix='/api/url/{short_url}', tags=['statistics'])
 async def get_visits(url: UrlDep):
     with db_session() as session:
         rep = UrlVisitsRepository(session)
-        grouped_visits = rep.get_grouped_by_date(url)
-        return {'url': url.url, 'stats': grouped_visits}
+        return {'url': url.url, 'stats': rep.get_stats(url)}
 
 
 @api_router.get('/stats/monthly')
@@ -22,4 +21,4 @@ async def get_visits_monthly(url: UrlDep):
     with db_session() as session:
         rep = UrlVisitsRepository(session)
         monthly_visits = rep.get_monthly(url)
-        return {'url': url.url, 'monthly': monthly_visits}
+        return {'url': url.url, 'monthly_visits': monthly_visits}

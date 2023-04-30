@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, Request, responses
 
 from .routers import url_router
 
-app = FastAPI()
+app = FastAPI(title='Glnk', version='0.1.0')
 
 app.include_router(url_router.api_router)
 

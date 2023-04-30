@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
+from app.api import app
 from app.db import SessionTest
 from app.models import Base
 from config import settings

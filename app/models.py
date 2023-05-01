@@ -13,6 +13,7 @@ class Url(Base):
     short_url: Mapped[str | None]
     ip_address: Mapped[str | None]
     user_agent: Mapped[str | None]
+    redirect: Mapped[bool] = mapped_column(default=False)
 
     visits: Mapped[list['UrlVisits']] = relationship(back_populates='url')
 

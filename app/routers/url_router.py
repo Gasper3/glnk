@@ -1,11 +1,12 @@
 from fastapi import Request, status
 from fastapi.routing import APIRouter
+from starlette import responses
 
+from .. import schemas
 from ..db import db_session
 from ..dependencies import UrlDep
 from ..repositories import UrlRepository, UrlVisitsRepository
-from .. import schemas
-from ..utils import generate_short_url, common_responses, get_responses
+from ..utils import common_responses, generate_short_url, get_responses
 
 api_router = APIRouter(prefix='/api/url')
 
@@ -16,7 +17,7 @@ api_router = APIRouter(prefix='/api/url')
 async def create_short_url(body: schemas.UrlRequest, request: Request):
     with db_session() as session:
         repository = UrlRepository(session)
-        url_obj, created = repository.get_or_create(url=body.url)
+        url_obj, created = repository.get_or_create(url=body.url, redirect=body.redirect)
         if created:
             url_obj.short_url = generate_short_url()
             url_obj.user_agent = request.headers.get('user-agent')
@@ -34,5 +35,8 @@ async def get_url(request: Request, url_obj: UrlDep):
             url=url_obj, user_agent=request.headers.get('user-agent'), ip_address=request.client.host
         )
         session.expunge(url_obj)
+
+    if url_obj.redirect:
+        return responses.RedirectResponse(url=url_obj.url)
 
     return {'url': url_obj.url}

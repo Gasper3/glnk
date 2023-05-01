@@ -3,6 +3,7 @@ from pydantic import BaseModel, HttpUrl
 
 class UrlRequest(BaseModel):
     url: HttpUrl
+    redirect: bool = False
 
 
 class UrlResponse(BaseModel):

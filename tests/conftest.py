@@ -13,7 +13,7 @@ TEST_DB_URL = f'{settings.postgres_url}/glnk_test'
 
 @pytest.fixture()
 def client():
-    yield TestClient(app)
+    return TestClient(app)
 
 
 @pytest.fixture(autouse=True, scope='session')

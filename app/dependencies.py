@@ -14,7 +14,9 @@ async def get_url_from_short_url(short_url: str):
         repository = UrlRepository(session)
         url_obj = repository.get_or_none(Url.short_url == short_url)
         if not url_obj:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Url not found')
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail='Url not found'
+            )
         session.expunge(url_obj)
         return url_obj
 

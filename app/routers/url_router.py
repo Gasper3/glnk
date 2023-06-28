@@ -6,7 +6,7 @@ from .. import schemas
 from ..db import db_session
 from ..dependencies import UrlDep
 from ..repositories import UrlRepository, UrlVisitsRepository
-from ..utils import common_responses, generate_short_url, get_responses
+from ..utils import common_responses, generate_short_url, url_dep_responses
 
 api_router = APIRouter(prefix='/api/url')
 
@@ -28,7 +28,7 @@ async def create_short_url(body: schemas.UrlRequest, request: Request):
     return {'short_url': url_obj.short_url}
 
 
-@api_router.get('/{short_url}', responses={**get_responses}, response_model=schemas.UrlResponse)
+@api_router.get('/{short_url}', responses={**url_dep_responses}, response_model=schemas.UrlResponse)
 async def get_url(request: Request, url_obj: UrlDep):
     with db_session() as session:
         UrlVisitsRepository(session).create(

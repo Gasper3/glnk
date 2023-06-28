@@ -9,7 +9,7 @@ common_responses = {
     500: {'model': schemas.ErrorSchema, 'description': 'Internal server error'},
 }
 
-get_responses = {404: {'model': schemas.BadRequestSchema, 'description': 'Item not found'}, **common_responses}
+url_dep_responses = {404: {'model': schemas.BadRequestSchema, 'description': 'Item not found'}, **common_responses}
 
 
 def generate_short_url() -> str:

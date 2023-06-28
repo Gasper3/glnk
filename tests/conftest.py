@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
+from app.api import app
 from app.db import SessionTest
 from app.models import Base
 from config import settings
@@ -13,7 +13,7 @@ TEST_DB_URL = f'{settings.postgres_url}/glnk_test'
 
 @pytest.fixture()
 def client():
-    yield TestClient(app)
+    return TestClient(app)
 
 
 @pytest.fixture(autouse=True, scope='session')

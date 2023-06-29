@@ -22,13 +22,13 @@ def create_db():
     connection = engine.connect()
     connection.execution_options(isolation_level="AUTOCOMMIT")
 
-    connection.execute(text(f'DROP DATABASE IF EXISTS glnk_test;'))
-    connection.execute(text(f'CREATE DATABASE glnk_test;'))
+    connection.execute(text('DROP DATABASE IF EXISTS glnk_test;'))
+    connection.execute(text('CREATE DATABASE glnk_test;'))
 
     try:
         yield
     finally:
-        connection.execute(text(f'DROP DATABASE glnk_test;'))
+        connection.execute(text('DROP DATABASE glnk_test;'))
     connection.close()
 
 

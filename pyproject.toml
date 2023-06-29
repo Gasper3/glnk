@@ -1,5 +1,5 @@
 [tool.black]
-line-length = 120
+line-length = 88
 skip-string-normalization = true
 skip-magic-trailing-comma = true
 extend-exclude = '''
@@ -9,3 +9,6 @@ extend-exclude = '''
   | migrations
 )
 '''
+
+[tool.ruff]
+extend-exclude=["*/migrations/*"]

@@ -1,9 +1,12 @@
+from datetime import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped, relationship
 
 
 class Base(DeclarativeBase):
     id: Mapped[int] = mapped_column(primary_key=True)
+    created: Mapped[datetime] = mapped_column(default=datetime.now)
+    updated: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now)
 
 
 class Url(Base):

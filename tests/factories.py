@@ -17,3 +17,12 @@ class UrlFactory(BaseFactory):
 
     short_url = factory.LazyFunction(generate_short_url)
     url = factory.Sequence(lambda i: f'https://example{i}.com')
+
+
+class UrlVisitsFactory(BaseFactory):
+    class Meta:
+        model = models.UrlVisits
+
+    ip_address = '127.0.0.1'
+    user_agent = 'TestClient'
+    url = factory.SubFactory(UrlFactory)

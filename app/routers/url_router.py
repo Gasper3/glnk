@@ -8,7 +8,7 @@ from ..dependencies import UrlDep
 from ..repositories import UrlRepository, UrlVisitsRepository
 from ..utils import common_responses, generate_short_url, url_dep_responses
 
-api_router = APIRouter(prefix='/api/url')
+api_router = APIRouter(prefix='/api/url', tags=['url'])
 
 
 @api_router.post(

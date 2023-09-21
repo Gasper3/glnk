@@ -1,7 +1,9 @@
 from fastapi import Response, status
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
 
 from app.models import Url
+from app.repositories import UrlVisitsRepository
 from . import factories
 
 
@@ -11,13 +13,16 @@ class TestUrl:
         response = client.post('/api/url', json=payload)
         assert response.status_code == status.HTTP_201_CREATED, response.content
 
-    def test_get(self, client: TestClient):
+    def test_get(self, client: TestClient, db_session: Session):
         url: Url = factories.UrlFactory()
         response: Response = client.get(f'/api/url/{url.short_url}')
         assert response.status_code == status.HTTP_200_OK
 
         data = response.json()
         assert data['url'] == url.url
+
+        visits = UrlVisitsRepository(db_session).find()
+        assert len(visits) == 1
 
     def test_get__not_exists(self, client: TestClient):
         response: Response = client.get('/api/url/INVALID')
